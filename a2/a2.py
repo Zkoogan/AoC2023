@@ -10,7 +10,7 @@ validationDict = {
 
 keys = "|".join(validationDict.keys())
 
-regex = "(\d+) (" +  keys + ")"
+regex = rf"(\d+) ({keys})"
 
 with open('a2.txt', 'r') as f:
     Lines = np.array(f.readlines())
