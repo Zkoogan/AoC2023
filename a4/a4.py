@@ -3,7 +3,7 @@ import re
 import math
 
 with open('a4.txt', 'r') as f:
-    data =  [x.split(':')[1].replace('\n', '').strip() for x in f.readlines()]
+    data =  [x.split(':')[1].strip() for x in f.readlines()]
 
 data = [(x.split('|')[0].strip(), x.split('|')[1].strip()) for x in data]
 data = [(re.split('\s+', x[0]), re.split('\s+', x[1])) for x in data]
