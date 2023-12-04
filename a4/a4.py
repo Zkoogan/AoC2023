@@ -16,8 +16,6 @@ print(score)
 
 numScratchCards = np.ones(len(data))
 
-print(data)
-
 for index, matches in enumerate(data):
     numScratchCards[index+1:index+len(matches)+1] += numScratchCards[index]
 
