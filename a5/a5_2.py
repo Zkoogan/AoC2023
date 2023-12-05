@@ -20,22 +20,17 @@ allRanges = []
 
 def findRanges(ranges, key):
     allRanges = []
-    for destination, source, length in dataDict[key]:
+    for destination, source, length in map(int, dataDict[key]):
         newRanges = []
         while ranges:
             range = ranges.pop()
-
-            s = int(source)
-            l = int(length)
-            d = int(destination)
-
-            before = (range[0],min(range[1],s))
-            inter = (max(range[0], s), min(s+l, range[1]))
-            after = (max(s+l, range[0]), range[1])
+            before = (range[0],min(range[1],source))
+            inter = (max(range[0], source), min(source+length, range[1]))
+            after = (max(source+length, range[0]), range[1])
             if before[1]>before[0]:
                 newRanges.append(before)
             if inter[1]>inter[0]:
-                allRanges.append((inter[0]-s+d, inter[1]-s+d))
+                allRanges.append((inter[0]-source+destination, inter[1]-source+destination))
             if after[1]>after[0]:
                 newRanges.append(after)
         ranges = sorted(newRanges)
