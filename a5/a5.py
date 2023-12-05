@@ -16,27 +16,6 @@ for key, value in data:
 
 dataDict["seeds"] = dataDict["seeds"][0]
 
-def calculateSeedToSoil(seeds):
-    return findMapping("seed-to-soil map", seeds)
-
-def calculateSoilToFertilizer(soils):
-    return findMapping("soil-to-fertilizer map", soils)
-
-def calculateFertilizerToWater(fertilizers):
-    return findMapping("fertilizer-to-water map", fertilizers)
-
-def calculateWaterToLight(waters):
-    return findMapping("water-to-light map", waters)
-
-def calculateLightToTemperature(lights):
-    return findMapping("light-to-temperature map", lights)
-
-def calculateTemperatureToHumidity(temperatures):
-    return findMapping("temperature-to-humidity map", temperatures)
-
-def calculateHumidityToLocation(humidities):
-    return findMapping("humidity-to-location map", humidities)
-
 def findMapping(key, values):
     data = dataDict[key]
 
@@ -50,27 +29,9 @@ def findMapping(key, values):
             results.append(value)
             
     return results
+results = dataDict.pop("seeds")
 
+for key in dataDict.keys():
+    results = findMapping(key, results)
 
-a = calculateHumidityToLocation(calculateTemperatureToHumidity(calculateLightToTemperature(calculateWaterToLight(calculateFertilizerToWater(calculateSoilToFertilizer(calculateSeedToSoil(dataDict["seeds"])))))))
-
-min = 92034785452836478952346789523456796234567895 #ridiculously large number
-
-for i in range(0,len(dataDict["seeds"]),2):
-    start, length = dataDict['seeds'][i:i+2]
-    start = int(start)
-    length = int(length)
-    end = start + length
-    moreNumbers = True
-    step = 100000
-
-    while(moreNumbers):
-        if(end < start + step):
-            step = end - start
-            moreNumbers = False
-        seeds = np.arange(start, start+step)
-        minOfBatch = np.min(calculateHumidityToLocation(calculateTemperatureToHumidity(calculateLightToTemperature(calculateWaterToLight(calculateFertilizerToWater(calculateSoilToFertilizer(calculateSeedToSoil(seeds))))))))
-        min = np.min([min,  minOfBatch])
-
-
-print(np.min(a), min)
+print(np.min(results))

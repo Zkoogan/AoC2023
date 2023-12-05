@@ -38,7 +38,7 @@ def findRanges(ranges, key):
                 allRanges.append((inter[0]-s+d, inter[1]-s+d))
             if after[1]>after[0]:
                 newRanges.append(after)
-        ranges = newRanges
+        ranges = sorted(newRanges)
     return allRanges + ranges
 
 seedRanges = []
