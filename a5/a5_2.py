@@ -42,7 +42,6 @@ for i in range(0,len(dataDict["seeds"]),2):
     end = start + length
     seedRanges.append((start, end))
 
-
 ranges = sorted(seedRanges)
 
 dataDict.pop("seeds")
